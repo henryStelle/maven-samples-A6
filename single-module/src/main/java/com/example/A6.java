@@ -9,6 +9,6 @@ public class A6 {
     }
 
     public boolean length_check(String input){
-        return (input.length() > 5);
+        return (input.length() < 5);
     }
 }
