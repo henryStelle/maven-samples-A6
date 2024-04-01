@@ -20,19 +20,20 @@ pipeline {
         sh 'mvn test -q'
         sh 'mvn clean'
       }
-      post {
-        failure {
-          options {
-            timeout(time: 10, unit: 'MINUTES')
-          }
-          // fe4e6bf is the last known good commit (add A6 class)
-          // the commit hash is different in your repository
-          // as I was forced to update a dependency and rebase
-          sh 'git bisect start HEAD fe4e6bf'
-          sh 'git bisect run mvn clean test -q'
-          sh 'git bisect reset'
-        }
+    }
+  }
+
+  post {
+    failure {
+      options {
+        timeout(time: 10, unit: 'MINUTES')
       }
+      // fe4e6bf is the last known good commit (add A6 class)
+      // the commit hash is different in your repository
+      // as I was forced to update a dependency and rebase
+      sh 'git bisect start HEAD fe4e6bf'
+      sh 'git bisect run mvn clean test -q'
+      sh 'git bisect reset'
     }
   }
 }
