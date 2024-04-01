@@ -25,9 +25,6 @@ pipeline {
 
   post {
     failure {
-      options {
-        timeout(time: 10, unit: 'MINUTES')
-      }
       // fe4e6bf is the last known good commit (add A6 class)
       // the commit hash is different in your repository
       // as I was forced to update a dependency and rebase
